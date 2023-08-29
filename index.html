@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Politics and Administration</title>
+  <style>
+    body {
+      font-family:Calibri;
+     font-size: smaller;
+    }
+    /* Style for the toggle buttons */
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    /* Style for the active (toggled) buttons */
+    button.active {
+      background-color: #28a745;
+    }
+    textarea {
+      width: 80%;
+      max-width: 100%;
+      /* Ensure it doesn't exceed the viewport width */
+      box-sizing: border-box;
+      /* Include padding and border in the width calculation */
+    }
+    #input1 {
+      width: 20%;
+      box-sizing: border-box;
+      /* Include padding and border in the width calculation */
+    }
+    /* Add CSS for green and red backgrounds based on the match */
+    .match {
+      background-color: #28a745;
+      /* Green */
+    }
+    .no-match {
+      background-color: #dc3545;
+      /* Red */
+    }
+    /* New style for the output */
+    /* New style for the output */
+    .jkl-details {
+      display: none;
+      /*this stop the detail content from displaying atutomatically.remove it if needed*/
+      font-size: small;
+      font-style: italic;
+
+      /* Add other styles as needed */
+    }
+    .details-content {
+      font-size: small;
+      font-style: italic;
+      /* Add other styles as needed */
+    }
+    #abbr {
+      display: none;
+    }
+
+    .highlight {
+            color: red;
+        }
+  </style>
+</head>
+<body>
+  <h1>Bar Council Syllables (31st Advocate License)</h1>
+  
+  <!-- Add the Show All JKL button -->
+  <button id="showAllJKLButton" onclick="toggleAllJKL()">Click Here for Syllables</button>
+  <!-- Add the Show LMN button -->
+ 
+  <div id="jklContainer"></div>
+  <!--content of lmn is visible here-->
+ 
+  <script>
+    var valuesArray = [
+
+
+      {input1: "A", input2: "Constitutional Law (संवैधानिक कानून)", input3: "", input4: "1.Basic Principles of Constitution and Constitutionalism<br> १.संविधान र संविधानवादका आधारभूत सिद्धान्तहरू<br><br> 2.Constitutional Development of Nepal<br> २.नेपालको संवैधानिक विकासक्रम<br><br> 3.The Basic Features of Constitution of Nepal (2072)<br> ३.नेपालको संविधानका आधारभूत विशेषताहरू<br><br> 4.Fundamental Rights, Duties and Constitutional Remedies<br> ४.मौलिक हक, कर्तव्य र संवैधानिक उपचार<br><br> 5.Justification and Limitation of Obligation of State, Directive Principles and Policies<br> ५.राज्यको दायित्व निर्देशक सिद्धान्त तथा नीतिहरूको औचित्यता र परिसीमा<br><br> 6.Basic Principles of Independent Judiciary<br> ६.स्वतन्त्र न्यायपालिकाको आधारभूत सिद्धान्तहरू<br><br> 7.Contribution to the Supreme Court on Constitutional Matters<br> ७.संवैधानिक विषयमा सर्वोच्च अदालतको योगदान<br><br> 8.Constitutional Bench<br> ८.संवैधानिक इजलास<br><br> 9.Public Interest Litigation<br> ९.सार्वजनिक सरोकारका विषयहरु<br><br> 10.Judicial Review & its limitations<br> १०.न्यायीक पुनरावलोकन र यसका सिमाहरु<br><br> 11.Constitutional Bodies of Nepal:<br> ११.नेपालका संवैधानिक अङ्गहरूः<br><br> ", input5: "a.Attorney General<br> क. महान्यायाधिवक्ता<br><br>b.Election Commission<br> ख.निर्वाचन आयोग<br><br> c.Commission for Investigation of Abuse of Authority<br> ग.अख्तियार दुरुपयोग अनुसन्धान आयोग<br><br> d.National Human Rights Commission<br> घ.राष्ट्रिय मानव अधिकार आयोग<br><br> e.National Commission for Women<br> ङ.राष्ट्रिय महिला आयोग<br><br> ", input6: "12.Jurisdiction and Interrelation of Federation, Province & Local Government in Federal Nepal<br> १२.नेपालको संघीयता सम्बन्धी व्यवस्थामा संघ, प्रदेश र स्थानीय सरकारको अधिकारक्षेत्र र अन्तरसम्बन्ध<br><br> 13.Basic Principle and Process of Amendment of the Constitution<br> १३.संविधान संशोधनका आधारभूत सिद्धान्त र प्रकृया<br><br>", input7: "", input8: "", input9: "",  input10: "",  input11: "", input12: "", input13: "", input14: "", input15: "", input16: "", input17: "", input18: "", input19: ""},
+
+      {input1: "B", input2: "Adiministrative Law (प्रशासनिक कानून)", input3: "", input4: "1. Nature, Scope and Sources of Administrative Law<br> १. प्रशासनिक कानूनको प्रकृति, क्षेत्र र स्रोत<br><br> 2. Administrative Law and Rule of Law<br> २. प्रशासनिक कानून र विधिको शासन<br><br> 3. Principles of Separation of Power: Practice, Control and Balance<br> ३. शक्तिपृथकीकरणको सिद्धान्तः प्रयोग, नियन्त्रण र सन्तुलन<br><br> 4. Delegated Legislation and its Limitation<br> ४. प्रत्यायोजित विधायन र यसको परिसीमाहरु<br><br> 5. Administrative Discretion<br> ५. प्रशासनिक स्वविवेक<br><br> 6. Principles of Natural Justice<br> ६. प्राकृतिक न्यायको सिद्धान्त<br><br> 7. Judicial Review of Administrative Actions<br> ७. प्रशासनिक कार्यको न्यायिक पुनरावलोकन<br><br> 8. Quasi Judicial Bodies, Administrative Tribunals and Administrative Courts<br> ८. अर्धन्यायिक निकाय, प्रशासकीय न्यायाधिकरण तथा प्रशासकीय अदालत<br><br>", input5: "", input6: "", input7: "", input8: "", input9: "",  input10: "",  input11: "", input12: "", input13: "", input14: "", input15: "", input16: "", input17: "", input18: "", input19: ""},
+
+      {input1: "C", input2: "International Law (अन्तरराष्ट्रिय कानून)", input3: "", input4: "1. Nature, Scope and Principles of Public and Private International Law<br> १. सार्वजनिक एवं निजी अन्तर्राष्ट्रिय कानूनका प्रकृति, कार्यक्षेत्र र सिद्धान्त<br><br> 2. Interrelationship between International and National Law: Monism and Dualism<br> २. अन्तर्राष्ट्रिय र राष्ट्रिय कानूनको अन्तरसम्बन्ध एकात्मक र द्वैधात्मक<br><br> 3. International Treaty & its Implementation<br> ३. अन्तर्राष्ट्रिय सन्धी र यसको कार्यान्वयन<br><br> 4. Interrelationship between International Human Rights and Humanitarian Law: its Use & Limitation<br> ४. अन्तर्राष्ट्रिय मानवअधिकार र मानवीय कानूनको अन्तरसम्बन्ध, परिसीमा र प्रयोग<br><br> 5. Local and Universal Jurisdiction of International Law<br> ५. अन्तर्राष्ट्रिय कानूनको स्थानीय र विश्वव्यापी अधिकारक्षेत्र<br><br> 6. Position of International Law in National Law and its Use<br> ६. नेपालको कानूनमा अन्तर्राष्ट्रिय कानूनको स्थान र प्रयोग<br><br>", input5: "", input6: "", input7: "", input8: "", input9: "",  input10: "",  input11: "", input12: "", input13: "", input14: "", input15: "", input16: "", input17: "", input18: "", input19: ""},
+
+      {input1: "D", input2: "Criminal Law (फौजदारी कानून)", input3: "", input4: "1.General Principles Regarding Criminal Justice and Punishment<br> १.फौजदारी न्याय र सजाय सम्बन्धी सामान्य सिद्धान्तहरु<br><br> 2.Criminal Conspiracy, Attempt, Abetment and Accomplishment<br> २.आपराधिक षड्यन्त्र, उद्योग, दुरुत्साहन र मतियार<br><br> 3.Aggravating and Mitigating Factor of an Offence<br> ३.कसुरको गाम्भीर्यता बढाउने तथा घटाउने अवस्थाहरु<br><br> 4.Homicide<br> ४.ज्यान सम्बन्धी कसूर<br><br> 5.Offence against Public peace and justice<br> ५.सार्वजनिक शान्ति र न्याय विरुद्धको कसुर<br><br> 6.Offences against Public Interest, Health, Safety, Convenience and Morals<br> ६.सार्वजनिक हित, स्वास्थ्य, सुरक्षा, सुविधा र नैतिकता बिरुद्धका कसुर<br><br> 7.Offences Relating to Arms, Ammunitions and Explosives<br> ७.हातहतियारतथा खरखजाना र विष्फोटक पदार्थसम्बन्धी कसुर<br><br> 8.Offences against National and Public Heritages<br> ८.राष्ट्रिय तथा सार्वजनिक सम्पदा बिरुद्धका कसुर<br><br> 9.Offences Relating to Discrimination and Other Degrading Treatment<br> ९.भेदभाव तथा अन्य अपमानजन्य व्यवहार सम्बन्धी कसुर<br><br> 10.Offences Relating to Marriage (child marriage, polygamy)<br> १०.विवाह सम्बन्धी कसुर (बालविवाह, बहुविवाह)<br><br> 11.Offences against Protection of Pregnancy<br> ११.गर्भ संरक्षण बिरुद्धको कसुर<br><br> 12.Offences Relating to Hurt or Grievous Hurt<br> १२.कुटपिट वा अङ्गभङ्ग सम्बन्धी कसुर<br><br> 13.Offences Relating to Unlawful Detention<br> १३.गैरकानूनी थुना सम्बन्धी कसुर<br><br> 14.Offences Relating to Enforced Disappearance<br> १४.व्यक्ति बेपत्ता पार्ने सम्बन्धी कसुर<br><br> 15.Offences Relating to Kidnapping or Taking of Hostages<br> १५.अपहरण वा शरीरबन्धक सम्बन्धी कसुर<br><br> 16.Sexual Offences<br> १६.यौनजन्य कसूर<br><br>", input5: "a.Rape<br> क.जवर्जस्ती करणी<br><br> b.Incest<br> ख.हाडनाता करणी<br><br> c.Sexual Abuse<br> ग.यौन दुर्व्यवहार<br><br> d.Child Sexual Abuse<br> घ.वालयौन दूरुपयोग<br><br>", input6: "17.Offenses related to Theft and Robbery<br> १७.चोरी तथा डाँका सम्बन्धी कसुर<br><br> 18.Offences Relating to Cheating, Criminal Breach of Trust and Extortion<br> १८.ठगी, आपराधिक विश्वासघात तथा आपराधिक लाभ (एक्सटर्सन) सम्बन्धी कसूर<br><br> 19.Offences against Individual Privacy and Prestige<br> १९.वैयक्तिक गोपनियता तथा प्रतिष्ठा विरुद्धको कसूर<br><br> 20.Offence Relating to Defamation<br> २०.गाली बेइज्जती सम्बन्धी कसुर<br><br> 21.Offences Relating to Weights and Measures<br> २१.नापतौल सम्बन्धी कसुर<br><br> 22.Offences Related to Insurance<br> २२.बीमा सम्बन्धी कसूर<br><br> 23.Banking Offences<br> २३.वैकिङ्ग कसूर सम्बन्धी अपराध<br><br> 24.Cyber Crime<br> २४.विद्युतीय अपराध (Cyber Crime )<br><br> 25.Offences related to Vehicle Traffic<br> २५.सवारी सम्बन्धी कसुर<br><br> 26.Offence Related to Gender Violence<br> २६.लैङिक हिंसा सम्बन्धी कसुर<br><br> 27.Organized crime (Human Trafficking, Drug Trafficking and Money Laundering)<br> २७.संगठित अपराध (मानव बेचबिखन, लागु औषध र सम्पत्ति शुद्धिकरण)सम्बन्धी कसुर<br><br> 28.Offence related to Corruption<br> २८.भ्रष्टाचार सम्बन्धी कसूर<br><br>", input7: "", input8: "", input9: "", input10: "", input11: "", input12: "", input13: "", input14: "", input15: "", input16: "", input17: "", input18: "", input19: ""},
+
+      {input1: "E", input2: " Civil Law (देवानी कानून)", input3: "", input4: "1. General Principle of Civil Law<br> १. देवानी कानूनका सामान्य सिद्धान्त<br><br> 2. Provision Relating to Person<br> २. व्यक्ति सम्बन्धी व्यवस्था<br><br> 3. Family Law<br> ३. पारिवारिक कानून<br><br>", input5: "a. Provisions Relating to Marriage & Divorce<br> अ. विवाह र सम्बन्ध विच्छेद सम्बन्धी व्यवस्था<br><br> b. Provisions Relating to Maternal and Paternal Authority System<br> आ. मातृक तथा पैत्रिक अख्तियारी सम्बन्धी व्यवस्था<br><br> c. Provisions Relating to Guardianship & Curatorship<br> इ. सरक्षकत्व र माथवर सम्बन्धी व्यवस्था<br><br> d. Provisions Relating to Adoption<br> ई. धर्मपुत्र तथा धर्मपुत्रीसम्बन्धी व्यवस्था<br><br> e. Provisions Relating to Relationship of Parents and Children<br> उ. आमा, बाबु तथा छोरा, छोरीको सम्बन्ध सम्बन्धी व्यवस्था<br><br> f. Provisions Relating to Partition<br> ऊ. अंशवण्डा सम्बन्धी व्यवस्था<br><br> g. Provisions Relating to Succession<br> ए. अपुताली सम्बन्धी व्यवस्था<br><br>", input6: "4. Relating to Property<br> ४. सम्पत्ति सम्बन्धी<br><br>", input7: "a. Principles Related to Property & Types of Property<br> अ. सम्पत्तिका सिद्धान्त र प्रकारहरु<br><br> b. Provisions Relating to Ownership and Possession<br> आ. स्वामित्व र भोगाधिकार सम्बन्धी व्यवस्था<br><br> c. Instrument Passing Arrangement<br> इ. लिखत पारित सम्बन्धी व्यवस्था<br><br> d. Provision related to the use, transfer and aquisition of Property<br> ई. सम्पत्तिको उपभोग, हस्तान्तरण तथा प्राप्ति सम्बन्धी व्यवस्था<br><br> e. Provisions Relating to Cultivation, Possession and Registration of Land<br> उ. जग्गा आवाद, भोगचलन तथा दतां सम्बन्धी व्यवस्था<br><br> f. Provisions Relating to Trusts<br> ऊ. गुठी सम्बन्धी व्यवस्था<br><br> g. Provisions Relating to Usufruct<br> ए. फलोपभोग सम्बन्धी व्यवस्था<br><br> h. Provisions Relating to Servitudes<br> ऐ. सुविधाभार सम्बन्धी व्यवस्था<br><br> i. Provisions Relating to House Rent<br> ओ. घर बहाल सम्बन्धी व्यवस्था<br><br> j. Provisions Relating to Gift and Donation<br> औ. दानवकस सम्बन्धी व्यवस्था<br><br> k. Provisions Relating to Mortgage & Pre-emption of Immovable Property<br> अं. अचल सम्पत्ति बन्धकी र हकसफा सम्बन्धी व्यवस्था<br><br> l. Provisions Relating to Transactions<br> अः. लेनदेन व्यवहार सम्बन्धी व्यवस्था<br><br>", input8: "5. Provision Relating to Tort<br> ५. दुष्कृति सम्बन्धी व्यवस्था<br><br> 6. Provision relating to Compensation<br> ६. क्षतिपूर्ति सम्बन्धी व्यवस्था<br><br>", input9: "", input10: "", input11: "", input12: "", input13: "", input14: "", input15: "", input16: "", input17: "", input18: "", input19: ""},
+
+      // Add more values as needed
+    ];
+    var mainTextVisible = false;
+    var lmnContentVisible = false;
+    var lmnDetailsVisible = false;
+    //autopopulating the input fields
+    function autoPopulateInputs() {
+      var input1Value = document.getElementById("input1").value;
+      var matchingValue = valuesArray.find(function (item) {
+        return item.input1 === input1Value;
+      });
+      var input1Field = document.getElementById("input1");
+      if (matchingValue) {
+        input1Field.value = matchingValue.input1;
+        input1Field.classList.remove("no-match");
+        input1Field.classList.add("match");
+        // Rest of your code to populate other fields...
+      } else {
+        input1Field.value = input1Value;
+        input1Field.classList.remove("match");
+        input1Field.classList.add("no-match");
+      }
+      if (matchingValue) {
+        document.getElementById("input2").value = matchingValue.input2.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input3").value = matchingValue.input3.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input4").value = matchingValue.input4.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input5").value = matchingValue.input5.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input6").value = matchingValue.input6.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input7").value = matchingValue.input7.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input8").value = matchingValue.input8.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input9").value = matchingValue.input9.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input10").value = matchingValue.input10.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input11").value = matchingValue.input11.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input12").value = matchingValue.input12.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input13").value = matchingValue.input13.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input14").value = matchingValue.input14.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input15").value = matchingValue.input15.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input16").value = matchingValue.input16.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input17").value = matchingValue.input17.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input18").value = matchingValue.input18.replace(/</g, "<").replace(/>/g, ">");
+        document.getElementById("input19").value = matchingValue.input19
+      } else {
+        document.getElementById("input2").value = "";
+        document.getElementById("input3").value = "";
+        document.getElementById("input4").value = "";
+        document.getElementById("input5").value = "";
+        document.getElementById("input6").value = "";
+        document.getElementById("input7").value = "";
+        document.getElementById("input8").value = "";
+        document.getElementById("input9").value = "";
+        document.getElementById("input10").value = "";
+        document.getElementById("input11").value = "";
+        document.getElementById("input12").value = "";
+        document.getElementById("input13").value = "";
+        document.getElementById("input14").value = "";
+        document.getElementById("input15").value = "";
+        document.getElementById("input16").value = "";
+        document.getElementById("input17").value = "";
+        document.getElementById("input18").value = "";
+        document.getElementById("input19").value = "";
+      }
+    }
+    var showAllJKLButton = document.getElementById("showAllJKLButton");
+    var jklContainer = document.getElementById("jklContainer");
+    // Toggle the visibility of all JKL content
+    function toggleAllJKL() {
+      if (jklContainer.innerHTML === '') {
+        // Generate JKL content if it's empty
+        for (var i = 0; i < valuesArray.length; i++) {
+          var input1Value = valuesArray[i].input1;
+          var input2Value = valuesArray[i].input2.replace(/</g, "<").replace(/>/g, ">");
+          var input3Value = valuesArray[i].input3.replace(/</g, "<").replace(/>/g, ">");
+          var input4Value = valuesArray[i].input4.replace(/</g, "<").replace(/>/g, ">");
+          var input5Value = valuesArray[i].input5.replace(/</g, "<").replace(/>/g, ">");
+          var input6Value = valuesArray[i].input6.replace(/</g, "<").replace(/>/g, ">");
+          var input7Value = valuesArray[i].input7.replace(/</g, "<").replace(/>/g, ">");
+          var input8Value = valuesArray[i].input8.replace(/</g, "<").replace(/>/g, ">");
+          var input9Value = valuesArray[i].input9.replace(/</g, "<").replace(/>/g, ">");
+          var input10Value = valuesArray[i].input10.replace(/</g, "<").replace(/>/g, ">");
+          var input11Value = valuesArray[i].input11.replace(/</g, "<").replace(/>/g, ">");
+          var input12Value = valuesArray[i].input12.replace(/</g, "<").replace(/>/g, ">");
+          var input13Value = valuesArray[i].input13.replace(/</g, "<").replace(/>/g, ">");
+          var input14Value = valuesArray[i].input14.replace(/</g, "<").replace(/>/g, ">");
+          var input15Value = valuesArray[i].input15.replace(/</g, "<").replace(/>/g, ">");
+          var input16Value = valuesArray[i].input16.replace(/</g, "<").replace(/>/g, ">");
+          var input17Value = valuesArray[i].input17.replace(/</g, "<").replace(/>/g, ">");
+          var input18Value = valuesArray[i].input18.replace(/</g, "<").replace(/>/g, ">");
+          var input19Value = valuesArray[i].input19;
+          var jklContentText = '<b><u>' + input1Value + ': ' + input2Value + '</b></u>' + input3Value + ' + ';
+          jklContentText += '<a href="javascript:void(0)" onclick="toggleJKLDetails(event, ' + i + ')">[' + (i + 1) + ']</a>';
+          jklContentText += '<div id="jklDetails_' + i + '" class="jkl-details">' + input1Value + ":" + input4Value + input5Value + input6Value + input7Value+ input8Value+ input9Value+ input10Value+ input11Value+ input12Value+ input13Value+ input14Value+input15Value  + input16Value+'<a href="' + input17Value + '">' + input17Value + '</a>' + input18Value + '</div>';
+          var jklContent = document.createElement("div");
+          jklContent.innerHTML = jklContentText;
+          jklContainer.appendChild(jklContent);
+        }
+        showAllJKLButton.textContent = "Hide Syllables"; // Update button text
+        showAllJKLButton.classList.add("active"); // Add "active" class
+      } else {
+        // Clear JKL content if it's not empty
+        jklContainer.innerHTML = '';
+        showAllJKLButton.textContent = "Show Syllables"; // Update button text
+        showAllJKLButton.classList.remove("active"); // Remove "active" class
+      }
+    }
+    // Toggle the visibility of JKL details
+    function toggleJKLDetails(index) {
+      var detailsDiv = document.getElementById('jklDetails_' + index);
+      if (detailsDiv.style.display === 'none') {
+        detailsDiv.style.display = 'block';
+      } else {
+        detailsDiv.style.display = 'none';
+      }
+    }
+    // Toggle the visibility of LMN content
+    function toggleLMN() {
+      var lmnContent = document.getElementById("lmnContent");
+      var showLMNButton = document.getElementById("showLMNButton");
+      lmnContentVisible = !lmnContentVisible;
+      if (lmnContentVisible) {
+        var input1Value = document.getElementById("input1").value;
+        var input2Value = document.getElementById("input2").value.replace(/</g, "<").replace(/>/g, ">");
+        var input3Value = document.getElementById("input3").value.replace(/</g, "<").replace(/>/g, ">");
+        var input4Value = document.getElementById("input4").value.replace(/</g, "<").replace(/>/g, ">");
+        var input5Value = document.getElementById("input5").value.replace(/</g, "<").replace(/>/g, ">");
+        var input6Value = document.getElementById("input6").value.replace(/</g, "<").replace(/>/g, ">");
+        var input7Value = document.getElementById("input7").value.replace(/</g, "<").replace(/>/g, ">");
+        var input8Value = document.getElementById("input8").value.replace(/</g, "<").replace(/>/g, ">");
+        var input9Value = document.getElementById("input9").value.replace(/</g, "<").replace(/>/g, ">");
+        var input10Value = document.getElementById("input10").value.replace(/</g, "<").replace(/>/g, ">");
+        var input11Value = document.getElementById("input11").value.replace(/</g, "<").replace(/>/g, ">");
+        var input12Value = document.getElementById("input12").value.replace(/</g, "<").replace(/>/g, ">");
+        var input13Value = document.getElementById("input13").value.replace(/</g, "<").replace(/>/g, ">");
+        var input14Value = document.getElementById("input14").value.replace(/</g, "<").replace(/>/g, ">");
+        var input15Value = document.getElementById("input15").value.replace(/</g, "<").replace(/>/g, ">");
+        var input16Value = document.getElementById("input16").value.replace(/</g, "<").replace(/>/g, ">");
+        var input17Value = document.getElementById("input17").value.replace(/</g, "<").replace(/>/g, ">");
+        var input18Value = document.getElementById("input18").value.replace(/</g, "<").replace(/>/g, ">");
+        var input19Value = document.getElementById("input19").value;
+        var lmnContentText = '<b><u>' + input1Value + ':'  + input2Value + '</b></u>' + input3Value + ' + ';
+        lmnContentText += '<a href="javascript:void(0)" onclick="toggleDetails()">[Details]</a>';
+        document.getElementById("lmnOutput").innerHTML = lmnContentText;
+        lmnContent.style.display = "block";
+        showLMNButton.textContent = "Hide LMN";
+        showLMNButton.classList.add("active"); // Add "active" class
+      } else {
+        lmnContent.style.display = "none";
+        showLMNButton.textContent = "Show LMN";
+        hideDetails();
+        showLMNButton.classList.remove("active"); // Remove "active" class
+        hideDetails(); // Also call hideDetails when hiding LMN
+      }
+    }
+    // Toggle the visibility of LMN details
+    function toggleDetails() {
+      var lmnDetails = document.getElementById("lmnDetails");
+      lmnDetailsVisible = !lmnDetailsVisible;
+      if (lmnDetailsVisible) {
+        var input1Value = document.getElementById("input1").value;
+        var input2Value = document.getElementById("input2").value.replace(/</g, "<").replace(/>/g, ">");
+        var input3Value = document.getElementById("input3").value.replace(/</g, "<").replace(/>/g, ">");
+        var input4Value = document.getElementById("input4").value.replace(/</g, "<").replace(/>/g, ">");
+        var input5Value = document.getElementById("input5").value.replace(/</g, "<").replace(/>/g, ">");
+        var input6Value = document.getElementById("input6").value.replace(/</g, "<").replace(/>/g, ">");
+        var input7Value = document.getElementById("input7").value.replace(/</g, "<").replace(/>/g, ">");
+        var input8Value = document.getElementById("input8").value.replace(/</g, "<").replace(/>/g, ">");
+        var input9Value = document.getElementById("input9").value.replace(/</g, "<").replace(/>/g, ">");
+        var input10Value = document.getElementById("input10").value.replace(/</g, "<").replace(/>/g, ">");
+        var input11Value = document.getElementById("input11").value.replace(/</g, "<").replace(/>/g, ">");
+        var input12Value = document.getElementById("input12").value.replace(/</g, "<").replace(/>/g, ">");
+        var input13Value = document.getElementById("input13").value.replace(/</g, "<").replace(/>/g, ">");
+        var input14Value = document.getElementById("input14").value.replace(/</g, "<").replace(/>/g, ">");
+        var input15Value = document.getElementById("input15").value.replace(/</g, "<").replace(/>/g, ">");
+        var input16Value = document.getElementById("input16").value.replace(/</g, "<").replace(/>/g, ">");
+        var input17Value = document.getElementById("input17").value.replace(/</g, "<").replace(/>/g, ">");
+        var input18Value = document.getElementById("input18").value.replace(/</g, "<").replace(/>/g, ">");
+        var input19Value = document.getElementById("input19").value;
+        var detailsContent = '<div class="details-content">' + input4Value + input5Value + input6Value  + input7Value + input8Value + input9Value + input10Value + input11Value + input12Value  + input13Value + input14Value  + input15Value+input16Value + '<a href="' + input17Value + '">' + input17Value + '</a>' + input18Value + '</div>';
+        lmnDetails.innerHTML = detailsContent;
+        lmnDetails.style.display = "block";
+      } else {
+        lmnDetails.style.display = "none";
+      }
+    }
+    // Hide the details
+    function hideDetails() {
+      var lmnDetails = document.getElementById("lmnDetails");
+      lmnDetails.style.display = "none";
+      lmnDetailsVisible = false;
+    }
+    // Function to format the date as "dd Month Name, yyyy-hrhr:minmin"into input field 9
+    function formatDate(date) {
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      const day = date.getDate();
+      const monthName = months[date.getMonth()];
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, '0'); // Add leading zero if necessary
+      const minutes = date.getMinutes().toString().padStart(2, '0'); // Add leading zero if necessary
+      return `, Accessed on:${day} ${monthName}, ${year}-${hours}:${minutes}`;
+    }
+    // Function to handle the Ctrl + D + T key combination
+    function handleCtrlDT(event) {
+      if (event.ctrlKey && event.key === "d") {
+        // Prevent the default behavior of the key combination
+        event.preventDefault();
+        // Generate the current date and time in the desired format
+        const currentDate = new Date();
+        const formattedDate = formatDate(currentDate);
+        // Insert the formatted date into input 9
+        document.getElementById("input18").value = formattedDate;
+      }
+    }
+    // Add an event listener to the document for keydown events
+    document.addEventListener("keydown", handleCtrlDT);
+    // Toggle the visibility of ABC content
+    var mainTextVisible = false; // Declare the variable
+    function toggleABC() {
+      var output = document.getElementById("output");
+      var showButton = document.getElementById("showButton");
+      mainTextVisible = !mainTextVisible;
+      if (mainTextVisible) {
+        var input1Value = document.getElementById("input1").value.replace(/</g, "<").replace(/>/g, ">");
+        var input2Value = document.getElementById("input2").value.replace(/</g, "<").replace(/>/g, ">");
+        var input3Value = document.getElementById("input3").value.replace(/</g, "<").replace(/>/g, ">");
+        var input4Value = document.getElementById("input4").value.replace(/</g, "<").replace(/>/g, ">");
+        var input5Value = document.getElementById("input5").value.replace(/</g, "<").replace(/>/g, ">");
+        var input6Value = document.getElementById("input6").value.replace(/</g, "<").replace(/>/g, ">");
+        var input7Value = document.getElementById("input7").value.replace(/</g, "<").replace(/>/g, ">");
+        var input8Value = document.getElementById("input8").value.replace(/</g, "<").replace(/>/g, ">");
+        var input9Value = document.getElementById("input9").value.replace(/</g, "<").replace(/>/g, ">");
+        var input10Value = document.getElementById("input10").value.replace(/</g, "<").replace(/>/g, ">");
+        var input11Value = document.getElementById("input11").value.replace(/</g, "<").replace(/>/g, ">");
+        var input12Value = document.getElementById("input12").value.replace(/</g, "<").replace(/>/g, ">");
+        var input13Value = document.getElementById("input13").value.replace(/</g, "<").replace(/>/g, ">");
+        var input14Value = document.getElementById("input14").value.replace(/</g, "<").replace(/>/g, ">");
+        var input15Value = document.getElementById("input15").value.replace(/</g, "<").replace(/>/g, ">");
+        var input16Value = document.getElementById("input16").value.replace(/</g, "<").replace(/>/g, ">");
+        var input17Value = document.getElementById("input17").value.replace(/</g, "<").replace(/>/g, ">");
+        var input18Value = document.getElementById("input18").value.replace(/</g, "<").replace(/>/g, ">");
+        var input19Value = document.getElementById("input19").value;
+        output.textContent = '{input1: "' + input1Value + '", input2: "' + input2Value + '", input3: "' + input3Value + '", input4: "' + input4Value + '", input5: "' + input5Value + '", input6: "' + input6Value  + '", input7: "' + input7Value + '", input8: "' + input8Value + '", input9: "' + input9Value  + '", input10: "' + input10Value + '", input11: "' + input11Value + '", input12: "' + input12Value+'", input13: "' + input13Value+'", input14: "' + input14Value+'", input15: "' + input15Value+ '", input16: "' + input16Value + '", input17: "' + input17Value + '", input18: "' + input18Value + '", input19: "' + input19Value + '"}' + ",";
+        showButton.innerHTML = "Hide ABC";
+        showButton.classList.add("active"); // Add "active" class
+        output.style.display = "block";
+        showButton.textContent = "Hide ABC";
+      } else {
+        output.style.display = "none";
+        showButton.textContent = "Show ABC";
+        showButton.innerHTML = "Show ABC";
+        showButton.classList.remove("active"); // Remove "active" class}
+      }
+    }
+    //Using enter key etc. to enter #x003C;br> etc. in input field
+    function addLineBreak(event) {
+      if (event.key === "Enter" && event.ctrlKey) {
+        event.preventDefault();
+        var input = event.target;
+        var cursorPosition = input.selectionStart;
+        var currentValue = input.value;
+        var newValue =
+          currentValue.substring(0, cursorPosition) +
+          "<br>" +
+          currentValue.substring(cursorPosition);
+        input.value = newValue;
+        input.setSelectionRange(cursorPosition + 4, cursorPosition + 4);
+      }
+      if (event.key === "b" && event.ctrlKey) {
+        event.preventDefault();
+        var input = event.target;
+        var cursorPosition = input.selectionStart;
+        var currentValue = input.value;
+        var newValue =
+          currentValue.substring(0, cursorPosition) +
+          "<b>" +
+          "</b>" +
+          currentValue.substring(cursorPosition);
+        input.value = newValue;
+        input.setSelectionRange(cursorPosition + 3, cursorPosition + 3);
+      }
+      if (event.key === "u" && event.ctrlKey) {
+        event.preventDefault();
+        var input = event.target;
+        var cursorPosition = input.selectionStart;
+        var currentValue = input.value;
+        var newValue =
+          currentValue.substring(0, cursorPosition) +
+          "<u>" +
+          "</u>" +
+          currentValue.substring(cursorPosition);
+        input.value = newValue;
+        input.setSelectionRange(cursorPosition + 3, cursorPosition + 3);
+      }
+
+    }
+    var inputFields = document.querySelectorAll("input, textarea");
+    inputFields.forEach(function (input) {
+      input.addEventListener("keydown", addLineBreak);
+    });
+  </script>
+  <!-- this script is for saving and loading the page from the very position -->
+  <script>
+    function savePageState() {
+      // Check if local storage is available
+      if (typeof Storage !== "undefined") {
+        // Create an object to store the page state
+        var pageState = {
+          inputValues: {},
+          mainTextVisible: mainTextVisible,
+          lmnContentVisible: lmnContentVisible,
+          lmnDetailsVisible: lmnDetailsVisible,
+          outputContent: document.getElementById("output").textContent,
+          showAllJKLButtonActive: showAllJKLButton.classList.contains("active"),
+          jklContainerContent: jklContainer.innerHTML,
+          showLMNButtonActive: showLMNButton.classList.contains("active"),
+          lmnOutputContent: document.getElementById("lmnOutput").innerHTML,
+          lmnDetailsContent: document.getElementById("lmnDetails").innerHTML,
+        };
+        // Store the input field values
+        var inputFields = document.querySelectorAll("input, textarea");
+        inputFields.forEach(function (input) {
+          pageState.inputValues[input.id] = input.value;
+        });
+        // Convert the object to JSON and store it in local storage
+        localStorage.setItem("pageState", JSON.stringify(pageState));
+        alert("Page state saved successfully!");
+      } else {
+        alert(
+          "Local storage is not available. Your browser may be in private mode or have local storage disabled. " +
+          "This feature requires local storage to work properly."
+        );
+      }
+    }
+    function loadPageState() {
+      // Check if local storage is available
+      if (typeof Storage !== "undefined") {
+        // Retrieve the saved page state from local storage
+        var savedState = localStorage.getItem("pageState");
+        if (savedState) {
+          // Parse the JSON and restore the state
+          var pageState = JSON.parse(savedState);
+          // Restore input field values
+          for (var inputId in pageState.inputValues) {
+            var inputValue = pageState.inputValues[inputId];
+            document.getElementById(inputId).value = inputValue;
+          }
+          // Restore visibility states
+          mainTextVisible = pageState.mainTextVisible;
+          lmnContentVisible = pageState.lmnContentVisible;
+          lmnDetailsVisible = pageState.lmnDetailsVisible;
+          // Toggle visibility based on restored states
+          if (mainTextVisible) {
+            toggleABC();
+          }
+          if (lmnContentVisible) {
+            toggleLMN();
+          }
+          if (lmnDetailsVisible) {
+            toggleDetails();
+          }
+          // Restore output content and button states
+          document.getElementById("output").textContent = pageState.outputContent;
+          if (pageState.showAllJKLButtonActive) {
+            toggleAllJKL();
+          }
+          jklContainer.innerHTML = pageState.jklContainerContent;
+          if (pageState.showLMNButtonActive) {
+            toggleLMN();
+          }
+          document.getElementById("lmnOutput").innerHTML = pageState.lmnOutputContent;
+          document.getElementById("lmnDetails").innerHTML = pageState.lmnDetailsContent;
+          alert("Page state loaded successfully!");
+        } else {
+          alert("No saved state found.");
+        }
+      } else {
+        alert(
+          "Local storage is not available. Your browser may be in private mode or have local storage disabled. " +
+          "This feature requires local storage to work properly."
+        );
+      }
+    }
+  </script>
+  <!-- script for preventing scroll to top on click of hyperlink -->
+  <script>
+    function toggleJKLDetails(event, index) {
+      event.preventDefault(); // Prevent the default anchor behavior
+      var detailsDiv = document.getElementById('jklDetails_' + index);
+      // Toggle the display of the clicked detail
+      if (detailsDiv.style.display === 'block') {
+        detailsDiv.style.display = 'none'; // Close the clicked detail
+      } else {
+        // Close all open details, (एउटा लिङ्क खोल्दा अर्को लिङ्कको content बन्द नगर्ने भए यो ३ लाइन हटाइदिनुहोस्)
+        var allDetails = document.querySelectorAll('.jkl-details');
+        allDetails.forEach(function (detail) {
+          detail.style.display = 'none';
+        });
+        // Open the clicked detail
+        detailsDiv.style.display = 'block';
+      }
+    }
+  </script>
+  <script>
+    // Function to display a message in a pop-up window
+    function displayMessage(message) {
+      alert(message); // You can replace 'alert' with a more customized pop-up dialog.
+    }
+    // Function to hide the filtered content
+    function hideFilteredContent() {
+      var filteredContainer = document.getElementById('filteredContainer');
+      filteredContainer.style.display = 'none';
+    }
+    // Function to show the filtered content
+    function showFilteredContent() {
+      var filteredContainer = document.getElementById('filteredContainer');
+      filteredContainer.style.display = 'block';
+    }
+    // Function to clear the filtered content
+    function clearFilteredContent() {
+      var filteredContainer = document.getElementById('filteredContainer');
+      filteredContainer.innerHTML = ''; // Clear the content
+    }
+    // Function to apply the filter
+    function applyFilter(filter) {
+      // Clear the filtered container
+      clearFilteredContent();
+      // Iterate through the data array and apply the filter
+      valuesArray.forEach(function (item, index) {
+        var input19 = item.input19;
+        var filtered = false;
+        // Split the filter into terms using spaces
+        var filterTerms = filter.split(' ');
+        // Variables to track the current logical operator and result
+        var currentOperator = 'AND'; // Default to AND
+        var currentResult = true;
+        // Process each term in the filter
+        filterTerms.forEach(function (term) {
+          if (term.toUpperCase() === 'AND') {
+            currentOperator = 'AND';
+          } else if (term.toUpperCase() === 'OR') {
+            currentOperator = 'OR';
+          } else if (term.toUpperCase() === 'NOT') {
+            currentOperator = 'NOT';
+          } else {
+            if (currentOperator === 'AND') {
+              currentResult = currentResult && input19.includes(term);
+            } else if (currentOperator === 'OR') {
+              currentResult = currentResult || input19.includes(term);
+            } else if (currentOperator === 'NOT') {
+              currentResult = currentResult && !input19.includes(term);
+            }
+          }
+        });
+        // After processing all terms, the currentResult contains the final result
+        filtered = currentResult;
+        // If filtered, display the item in the filtered container
+        if (filtered) {
+          var filteredContainer = document.getElementById('filteredContainer');
+          var itemDiv = document.createElement('div');
+          itemDiv.textContent = 'Item ' + (index + 1) + ': ' + JSON.stringify(item);
+          filteredContainer.appendChild(itemDiv);
+        }
+      });
+      // If no matches are found, display a message in a pop-up window
+      var filteredContainer = document.getElementById('filteredContainer');
+      if (filteredContainer.childElementCount === 0) {
+        displayMessage("No matches found.");
+      } else {
+        showFilteredContent();
+      }
+    }
+    // Event listener for the filter button
+    var filterButton = document.getElementById('filterButton');
+    filterButton.addEventListener('click', function () {
+      var filterInput = document.getElementById('filterInput').value;
+      var buttonText = filterButton.textContent;
+      if (buttonText === 'Hide Filtered Content') {
+        // Hide all filtered content and toggle button text
+        hideFilteredContent();
+        filterButton.textContent = 'Show Filtered Content';
+      } else {
+        // Apply the filter and toggle button text
+        applyFilter(filterInput);
+        filterButton.textContent = 'Hide Filtered Content';
+      }
+    });
+  </script>
+  
+   <a id="BOTTOM"></a>
+  <footer>
+    <div id="abbr">
+      <p>
+        <br>cb1=constitutional bench (संवैधानिक इजलास)
+        <br>coni0=certiorari order not issued 
+        <br>coi1=certiorari order issued 
+        <br>db1=double bench (संयुक्त इजलास)
+        <br>efb5=extended full bench of five judges 
+        <br>fb1=full bench(पूर्ण इजलास)
+        <br>ioi1=interim order issued (अन्तरिम आदेश जारी)
+        <br>ioni0=interim order not issued (अन्तरिम आदेश जारी नहुने)
+        <br>moni0=mandatory order not issued
+        <br>moi1=mandatory order issued (उत्प्रेषण)
+        <br>pg1=preference given (अग्राधिकार)
+        <br>sb1=single bench (एकल इजलास)
+        <br>sc1=supreme court(सर्वोच्च अदालत)
+        <br>sco0=show caused ordered not issued  (कारण देखाउन आदेश जारी नहुने)
+        <br>sco1=show cause order issued (कारण देखाउ आदेश जारी)
+        <br>wi1=writ issued (रिट जारी)
+        <br>wip1=writ issued partially (रिट जारी आंशिक)
+        <br>wq1=writ quashed (रिट खारेज)
+        <br>kp1=koshi province
+        <br>pa1=province assembly
+        <br>cm1=constitutional morality
+        <br>voc1=vote of confidence
+        <br>ipk1=ishwor prasad khatiwoda
+        <br>cm2=chief minister
+        <br>pc1=parliamentary culture
+    </p>
+    </div>
+    <p id="developedby"><u><b>Developed By:</b></u><br> Adv. Debaka Timilsina (M.A, M.Ed, MPA, LL.B)<br>
+      debakatimilsina45@gmail.com <br>नागपञ्चमि, २०८०
+    </p>
+  </footer>
+</body>
+</html>
